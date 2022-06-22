@@ -18,7 +18,7 @@ public interface ContactService {
 
     int size();
 
-    Contact updateById(int id, String firstName, String lastName, String phoneNumber);
+    void updateById(int id, String firstName, String lastName, String phoneNumber);
 
     Contact findByPhoneNumber(String phoneNumber);
 
