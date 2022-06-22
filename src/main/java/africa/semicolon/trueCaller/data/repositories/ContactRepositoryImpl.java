@@ -88,15 +88,6 @@ public class ContactRepositoryImpl implements ContactRepository {
         throw new NullPointerException("Contact not found");
     }
 
-    @Override
-    public Contact updateById(int id, String firstName, String lastName, String phoneNumber) {
-        Contact contact = findById(id);
-        contact.setFirstName(firstName);
-        contact.setLastName(lastName);
-        contact.setPhoneNumber(phoneNumber);
-        return save(contact);
-    }
-
 //    @Override
 //    public void deleteByFirstName(String firstName) {
 //        Contact contact = findByFirstName(firstName);
