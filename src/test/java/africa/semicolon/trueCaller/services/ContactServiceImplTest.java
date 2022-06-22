@@ -18,7 +18,7 @@ class ContactServiceImplTest {
 
 
     @Test
-    void saveContact_findContactReturnsContact(){
+    void saveContact_findContactReturnsContact() {
         contactService.addContact("Ernest", "Airnest", "0987654321");
 
         Contact contact = contactService.findById(1);
@@ -31,7 +31,7 @@ class ContactServiceImplTest {
 
 
     @Test
-    void saveContact_AddsMoreThanOneContactTest(){
+    void saveContact_AddsMoreThanOneContactTest() {
         contactService.addContact("Ernest", "Airnest", "0987654321");
         contactService.addContact("Ernest", "Wale", "5647382910");
         contactService.addContact("Lanre", "Airnest", "1029384756");
@@ -42,7 +42,7 @@ class ContactServiceImplTest {
 
 
     @Test
-    void contactCanBeFoundByPhoneNumberTest(){
+    void contactCanBeFoundByPhoneNumberTest() {
         contactService.addContact("Ernest", "Airnest", "0987654321");
         contactService.addContact("Airnest", "Wale", "5647382910");
         contactService.addContact("Lanre", "Airnest", "1029384756");
@@ -57,18 +57,18 @@ class ContactServiceImplTest {
 
 
     @Test
-    void contactReturnsAllSavedContactTest(){
+    void contactReturnsAllSavedContactTest() {
         contactService.addContact("Ernest", "Airnest", "0987654321");
         contactService.addContact("Ernest", "Wale", "5647382910");
         contactService.addContact("Lanre", "Airnest", "1029384756");
 
-        List <Contact> contacts = contactService.findAll();
+        List<Contact> contacts = contactService.findAll();
         assertEquals(3, contacts.size());
     }
 
 
     @Test
-    void saveContact_findContactById_And_DeleteContact(){
+    void saveContact_findContactById_And_DeleteContact() {
         contactService.addContact("Ernest", "Airnest", "0987654321");
         contactService.addContact("Ernest", "Wale", "5647382910");
         contactService.addContact("Lanre", "Airnest", "1029384756");
@@ -80,7 +80,7 @@ class ContactServiceImplTest {
 
 
     @Test
-    void savedContactCanBeUpdatedById(){
+    void savedContactCanBeUpdatedById() {
         contactService.addContact("Ernest", "Airnest", "0987654321");
         contactService.addContact("James", "Wale", "5647382910");
         contactService.addContact("Lanre", "Airnest", "1029384756");
@@ -97,13 +97,13 @@ class ContactServiceImplTest {
 
 
     @Test
-    void contactReturnsAllMatchingNamesTest(){
+    void contactReturnsAllMatchingNamesTest() {
         contactService.addContact("Ernest", "Airnest", "0987654321");
         contactService.addContact("Airnest", "Wale", "5647382910");
         contactService.addContact("Lanre", "Airnest", "1029384756");
         contactService.addContact("Batman", "jack", "56473838383");
 
-        List <Contact> contacts = contactService.findByName("Airnest");
+        List<Contact> contacts = contactService.findByName("Airnest");
         assertEquals(3, contacts.size());
     }
 

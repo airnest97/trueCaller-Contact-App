@@ -7,10 +7,15 @@ import java.util.List;
 
 public interface ContactRepository {
     int count();
+
     Contact save(Contact contact);
+
     Contact findByFirstName(String firstName);
+
     Contact findById(int id);
+
     Contact findByLastName(String lastName);
+
     Contact findByPhoneNumber(String phoneNumber);
 
     List<Contact> findAll();

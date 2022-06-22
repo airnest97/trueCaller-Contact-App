@@ -16,7 +16,6 @@ public class ContactServiceImpl implements ContactService {
     public void addContact(String firstName, String lastName, String phoneNumber) {
         Contact contact = new Contact(firstName, lastName, phoneNumber);
         contactRepository.save(contact);
-
     }
 
     @Override

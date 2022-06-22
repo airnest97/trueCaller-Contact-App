@@ -11,12 +11,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ContactRepositoryImplTest {
     private ContactRepository contactRepository;
+
     @BeforeEach
     void setUp() {
         contactRepository = new ContactRepositoryImpl();
     }
+
     @Test
-    void saveContact_countIsOneTest(){
+    void saveContact_countIsOneTest() {
         Contact contact = new Contact();
         contact.setFirstName("Samson");
 
@@ -26,7 +28,7 @@ class ContactRepositoryImplTest {
     }
 
     @Test
-    void saveContactTwice_countIsTwoTest(){
+    void saveContactTwice_countIsTwoTest() {
         Contact contact = new Contact();
         contact.setFirstName("Samson");
 
@@ -42,7 +44,7 @@ class ContactRepositoryImplTest {
     }
 
     @Test
-    void saveContact_findByIdReturnsContactTest(){
+    void saveContact_findByIdReturnsContactTest() {
         Contact contact = new Contact();
         contact.setFirstName("Samson");
 
@@ -62,7 +64,7 @@ class ContactRepositoryImplTest {
     }
 
     @Test
-    void saveContact_findByNameReturnsContactTest(){
+    void saveContact_findByNameReturnsContactTest() {
         Contact contact = new Contact();
         contact.setFirstName("Samson");
 
@@ -82,7 +84,7 @@ class ContactRepositoryImplTest {
     }
 
     @Test
-    void saveContact_findByLastNameReturnsContactTest(){
+    void saveContact_findByLastNameReturnsContactTest() {
         Contact contact = new Contact();
         contact.setLastName("Samuel");
 
@@ -102,7 +104,7 @@ class ContactRepositoryImplTest {
     }
 
     @Test
-    void saveContact_findByPhoneNumberReturnsContactTest(){
+    void saveContact_findByPhoneNumberReturnsContactTest() {
         Contact contact = new Contact();
         contact.setPhoneNumber("0987654321");
 
@@ -122,7 +124,7 @@ class ContactRepositoryImplTest {
     }
 
     @Test
-    void contactReturnsAllMatchingNamesTest(){
+    void contactReturnsAllMatchingNamesTest() {
         Contact contact = new Contact(1, "Ernest", "Jungle", "12345");
         Contact contact2 = new Contact(2, "west", "east", "54321");
         Contact contact3 = new Contact(3, "north", "south", "2345");
