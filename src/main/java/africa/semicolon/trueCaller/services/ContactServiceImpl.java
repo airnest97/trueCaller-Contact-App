@@ -57,7 +57,6 @@ public class ContactServiceImpl implements ContactService {
         contact.setLastName(lastName);
         contact.setPhoneNumber(phoneNumber);
         return contactRepository.save(contact);
-//        contactRepository.updateById(id, firstName, lastName, phoneNumber);
     }
 
     @Override
