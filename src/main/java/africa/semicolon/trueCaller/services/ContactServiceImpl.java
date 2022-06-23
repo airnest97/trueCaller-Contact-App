@@ -2,37 +2,42 @@ package africa.semicolon.trueCaller.services;
 
 import africa.semicolon.trueCaller.data.models.Contact;
 import africa.semicolon.trueCaller.data.repositories.ContactRepository;
-import africa.semicolon.trueCaller.data.repositories.ContactRepositoryImpl;
+import africa.semicolon.trueCaller.exceptions.NoContactException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+@Service
 public class ContactServiceImpl implements ContactService {
 
-    private final ContactRepository contactRepository = new ContactRepositoryImpl();
+    @Autowired
+    private ContactRepository contactRepository;
 
 
     @Override
-    public void addContact(String firstName, String lastName, String phoneNumber) {
+    public Contact addContact(String firstName, String lastName, String phoneNumber) {
         Contact contact = new Contact(firstName, lastName, phoneNumber);
         contactRepository.save(contact);
+        return contact;
     }
 
     @Override
-    public Contact findById(int id) {
-        return contactRepository.findById(id);
+    public Contact findById(String id) {
+        Optional<Contact> found = contactRepository.findById(id);
+        if (found.isEmpty()) throw new NoContactException("Contact not found");
+        return found.get();
     }
 
     @Override
     public List<Contact> findByName(String name) {
-        List<Contact> contacts = contactRepository.findAll();
-        List<Contact> newContact = new ArrayList<>();
-        for (Contact contact : contacts) {
-            if (name.equalsIgnoreCase(contact.getFirstName()) || name.equalsIgnoreCase(contact.getLastName())) {
-                newContact.add(contact);
-            }
-        }
-        return newContact;
+        List<Contact> contacts = new ArrayList<>();
+        contacts.addAll(contactRepository.findByFirstName(name));
+        contacts.addAll(contactRepository.findByLastName(name));
+        return contacts;
     }
 
     @Override
@@ -41,17 +46,12 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(String id) {
         contactRepository.deleteById(id);
     }
 
     @Override
-    public int size() {
-        return contactRepository.count();
-    }
-
-    @Override
-    public Contact updateById(int id, String firstName, String lastName, String phoneNumber) {
+    public Contact updateById(String id, String firstName, String lastName, String phoneNumber) {
         Contact contact = findById(id);
         contact.setFirstName(firstName);
         contact.setLastName(lastName);
@@ -64,42 +64,4 @@ public class ContactServiceImpl implements ContactService {
         return contactRepository.findByPhoneNumber(phoneNumber);
     }
 
-//    @Override
-//    public void deleteByFirstName(String firstName) {
-//        contactRepository.deleteByFirstName(firstName);
-//    }
-//
-//    @Override
-//    public void deleteByLastName(String lastName) {
-//        contactRepository.deleteByLastName(lastName);
-//    }
-//
-//    @Override
-//    public void deleteByPhoneNumber(String phoneNumber) {
-//        contactRepository.deleteByPhoneNumber(phoneNumber);
-//    }
-//
-//    @Override
-//    public List<Contact> findByFirstName(String firstName) {
-//        List<Contact> contacts = contactRepository.findAll();
-//        List<Contact> newContact = new ArrayList<>();
-//        for (Contact contact : contacts) {
-//            if (firstName.equalsIgnoreCase(contact.getFirstName())) {
-//                newContact.add(contact);
-//            }
-//        }
-//        return newContact;
-//    }
-//
-//    @Override
-//    public List<Contact> findByLastName(String lastName) {
-//        List<Contact> contacts = contactRepository.findAll();
-//        List<Contact> newContact = new ArrayList<>();
-//        for (Contact contact : contacts) {
-//            if (lastName.equalsIgnoreCase(contact.getLastName())) {
-//                newContact.add(contact);
-//            }
-//        }
-//        return newContact;
-//    }
 }
